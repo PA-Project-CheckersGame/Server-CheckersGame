@@ -27,8 +27,6 @@ public class ClientThread extends Thread {
             do{
                 request = in.readLine();
                 System.out.println("Am primit de la client: " + request);
-               // out.println("login username_not_registered");
-               // System.out.println("Am trimis catre client: login wrong password");
                 if(request.contains("login")){
                     if(request.contains("Tavilian")){
                         out.println("login failed username_not_registered");
@@ -40,10 +38,10 @@ public class ClientThread extends Thread {
                         out.flush();
                     }else if(request.contains("Tavi") && request.contains("1234")){
                         out.println("login ok");
-                        System.out.println("Am trimis: ok");
+                        System.out.println("Am trimis: login ok");
                         out.flush();
-                    }else {
-                        out.println("Sugi pula!");
+                    }else  if(request.contains("Tavi") && request.contains("pula")){
+                        out.println("login failed already_online");
                         out.flush();
                     }
 
