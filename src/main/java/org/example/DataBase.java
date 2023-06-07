@@ -18,13 +18,11 @@ public class DataBase {
 
         List<Player> playersList = new ArrayList<>();
 
-        try {   // Establish the database connection
+        try {
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
-            // Create a statement object
             Statement statement = connection.createStatement();
 
-            // Execute the query
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
@@ -35,10 +33,6 @@ public class DataBase {
             statement.close();
             connection.close();
 
-//            // Print the array contents
-//           for (Player player : playersList) {
-//                System.out.println(player);
-//            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,7 +52,6 @@ public class DataBase {
             statement.setBoolean(3, true);
             statement.setString(4, "online");
 
-            // Execute the query
             int rowsAffected = statement.executeUpdate();
             System.out.println("Rows affected: " + rowsAffected);
 
@@ -67,7 +60,6 @@ public class DataBase {
             if (generatedKeys.next()) {
                 int playerId = generatedKeys.getInt(1);
                 System.out.println("Generated player ID: " + playerId);
-                // You can use the generated player ID as needed
             }
 
         } catch (SQLException e) {
@@ -87,7 +79,6 @@ public class DataBase {
             statement.setInt(1, isOnlineValue);
             statement.setString(2, username);
 
-            // Execute the query
             int rowsAffected = statement.executeUpdate();
             System.out.println("Rows affected: " + rowsAffected);
 
@@ -106,7 +97,6 @@ public class DataBase {
             statement.setString(1, status);
             statement.setString(2, username);
 
-            // Execute the query
             int rowsAffected = statement.executeUpdate();
             System.out.println("Rows affected: " + rowsAffected);
 
@@ -114,7 +104,6 @@ public class DataBase {
             e.printStackTrace();
         }
     }
-
 
 }
 
