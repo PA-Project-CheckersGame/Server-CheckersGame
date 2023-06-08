@@ -5,12 +5,13 @@ import java.util.Random;
 
 public class GameListManager {
     private static ArrayList<Game> gamesList;
+    private static ArrayList<ActiveGame> activeGamesList;
 
     private DataBase dataBase = new DataBase();
 
     public GameListManager() {
-
         gamesList = new ArrayList<>();
+        activeGamesList = new ArrayList<>();
     }
 
     public void addGame(Game game) {
@@ -23,10 +24,27 @@ public class GameListManager {
         gamesList.remove(game);
     }
 
+    public void addActiveGame(ActiveGame activeGame) {
+        activeGamesList.add(activeGame);
+    }
+
+    public void removeActiveGame(ActiveGame activeGame) {
+        activeGamesList.remove(activeGame);
+    }
+
     public Game findGameById(int id) {
         for (Game game : gamesList) {
             if (game.getId() == id) {
                 return game;
+            }
+        }
+        return null;
+    }
+
+    public ActiveGame findActiveGameById(int gameId) {
+        for (ActiveGame activeGame : activeGamesList) {
+            if (activeGame.getGameId() == gameId) {
+                return activeGame;
             }
         }
         return null;
@@ -88,6 +106,64 @@ public class GameListManager {
             dataBase.changeStatus("Online", game.getPlayer1());
             game.setPlayer2("-");
             return "game_left " + gameId;
+        } else {
+            return "game_not_found";
+        }
+    }
+
+    public String startGame(int gameId) {
+        ActiveGame activeGame = findActiveGameById(gameId);
+        if (activeGame != null) {
+            activeGame.setStatus("inGame");
+            return "game_started " + gameId + " " + activeGame.getPlayer1() + " " + activeGame.getPlayer2() + " " + activeGame.getTurn();
+        } else {
+            return "game_not_found";
+        }
+    }
+
+    public String getWaitingRoomUpdate(int gameId) {
+        ActiveGame activeGame = findActiveGameById(gameId);
+        if (activeGame != null) {
+            return "waiting_room_update game_started " + gameId + " " + activeGame.getPlayer1() + " " + activeGame.getPlayer2() + " " + activeGame.getTurn();
+        } else {
+            return "waiting_room_update game_not_started";
+        }
+    }
+
+    public String setGameMove(int gameId, String turn, StringBuilder gameBoard) {
+        ActiveGame activeGame = findActiveGameById(gameId);
+        if (activeGame != null) {
+            activeGame.setTurn(turn);
+            activeGame.setGameBoard(gameBoard);
+            return "set_game_move ok";
+        } else {
+            return "game_not_found";
+        }
+    }
+
+    public String setGameStatus(int gameId, String status) {
+        ActiveGame activeGame = findActiveGameById(gameId);
+        if (activeGame != null) {
+            activeGame.setStatus(status);
+            return "set_game_status_ok";
+        } else {
+            return "game_not_found";
+        }
+    }
+
+    public String getGameUpdate(int gameId) {
+        ActiveGame activeGame = findActiveGameById(gameId);
+        if (activeGame != null) {
+            return "game_update " + activeGame.getTurn() + " " + activeGame.getGameBoard();
+        } else {
+            return "game_not_found";
+        }
+    }
+
+    public String getGameStatus(int gameId) {
+        ActiveGame activeGame = findActiveGameById(gameId);
+        if (activeGame != null) {
+            return "game_status " + activeGame.getStatus();
         } else {
             return "game_not_found";
         }

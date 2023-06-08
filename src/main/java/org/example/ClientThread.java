@@ -134,6 +134,80 @@ public class ClientThread extends Thread {
                     out.flush();
                 }
 
+                if(request.startsWith("start_game")) {
+                    String[] words = request.split(" ");
+
+                    int id = Integer.parseInt(words[1]); // "id"
+
+                    String start_gameResponse = gameListManager.startGame(id);
+
+                    out.println(start_gameResponse);
+                    out.flush();
+                }
+
+                if(request.startsWith("get_waiting_room_update")) {
+                    String[] words = request.split(" ");
+
+                    int id = Integer.parseInt(words[1]); // "id"
+
+                    String get_waiting_room_updateResponse = gameListManager.getWaitingRoomUpdate(id);
+
+                    out.println(get_waiting_room_updateResponse);
+                    out.flush();
+                }
+
+                if(request.startsWith("set_game_status")) {
+                    String[] words = request.split(" ");
+
+                    int id = Integer.parseInt(words[1]); // "id"
+                    String status = words[2]; // "status"
+
+                    String set_game_statusResponse = gameListManager.setGameStatus(id, status);
+
+                    out.println(set_game_statusResponse);
+                    out.flush();
+                }
+
+                if(request.startsWith("get_game_update")) {
+                    String[] words = request.split(" ");
+
+                    int id = Integer.parseInt(words[1]); // "id"
+
+                    String get_game_updateResponse = gameListManager.getGameUpdate(id);
+
+                    out.println(get_game_updateResponse);
+                    out.flush();
+                }
+
+                if(request.startsWith("get_game_status")) {
+                    String[] words = request.split(" ");
+
+                    int id = Integer.parseInt(words[1]); // "id"
+
+                    String get_game_statusResponse = gameListManager.getGameStatus(id);
+
+                    out.println(get_game_statusResponse);
+                    out.flush();
+                }
+
+                if(request.startsWith("set_game_move")) {
+                    String[] words = request.split(" ");
+
+                    int id = Integer.parseInt(words[1]); // "id"
+                    String turn = words[2]; // "status"
+                    StringBuilder gameBoardString = new StringBuilder();
+
+                    for(int i = 3; i < 66; i++){
+                        gameBoardString.append(words[i]);
+                        gameBoardString.append(" ");
+                    }
+
+                    String set_game_moveResponse = gameListManager.setGameMove(id, turn, gameBoardString);
+
+                    out.println(set_game_moveResponse);
+                    out.flush();
+                }
+
             } while (!request.equals("exit"));
             System.out.println("Client disconnected");
 
