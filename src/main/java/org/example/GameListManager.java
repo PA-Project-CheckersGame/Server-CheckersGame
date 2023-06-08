@@ -288,6 +288,7 @@ public class GameListManager {
             return "active_game_not_found";
 
         }
+
     }
 }
 
