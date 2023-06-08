@@ -1,7 +1,7 @@
 package org.example;
 
-
 public class ActiveGame {
+
         private int gameId;
         private String player1;
         private String player2;
@@ -10,10 +10,12 @@ public class ActiveGame {
         private String gameBoard = "0_2_0_2_0_2_0_2_2_0_2_0_2_0_2_0_0_2_0_2_0_2_0_2_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_1_0_1_0_1_0_1_0_0_1_0_1_0_1_0_1_1_0_1_0_1_0_1_0";
 
     public ActiveGame(int gameId, String player1, String player2) {
+
         this.gameId = gameId;
         this.player1 = player1;
         this.player2 = player2;
         this.turn = player1;
+
     }
 
     public int getGameId() {

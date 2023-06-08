@@ -9,21 +9,24 @@ public class Player {
     private String PlayerStatus;
     private int PlayerScore;
 
-    public Player(){}
     public Player(String playerName, String playerPassword, Boolean playerIsOnline, String playerStatus) {
+
         this.PlayerName = playerName;
         this.PlayerPassword = playerPassword;
         this.PlayerIsOnline = playerIsOnline;
         PlayerStatus = playerStatus;
+
     }
 
     public Player(int id, String playerName, String playerPassword, boolean playerIsOnline, String playerStatus, int playerScore) {
+
         this.id = id;
         PlayerName = playerName;
         PlayerPassword = playerPassword;
         PlayerIsOnline = playerIsOnline;
         PlayerStatus = playerStatus;
         PlayerScore = playerScore;
+
     }
 
     public int getId() {
@@ -76,6 +79,7 @@ public class Player {
 
     @Override
     public String toString() {
+
         return "Player{" +
                 "id=" + id +
                 ", PlayerName='" + PlayerName + '\'' +
@@ -84,5 +88,6 @@ public class Player {
                 ", PlayerStatus='" + PlayerStatus + '\'' +
                 ", PlayerScore=" + PlayerScore +
                 '}';
+
     }
 }

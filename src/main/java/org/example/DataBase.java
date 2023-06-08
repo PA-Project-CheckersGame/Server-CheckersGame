@@ -15,28 +15,28 @@ public class DataBase {
     public List<Player> getDataBaseValues() {
 
         String query = "SELECT * FROM players;";
-
         List<Player> playersList = new ArrayList<>();
 
         try {
+
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-
             Statement statement = connection.createStatement();
-
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+
                 playersList.add(new Player(resultSet.getString("PlayerName"), resultSet.getString("PlayerPassword"), resultSet.getBoolean("PlayerIsOnline"), resultSet.getString("PlayerStatus")));
+
             }
 
             resultSet.close();
             statement.close();
             connection.close();
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return playersList;
     }
 

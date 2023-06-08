@@ -7,9 +7,11 @@ public class Game {
     String player2;
 
     public Game(int id, String player1, String player2) {
+
         this.id = id;
         this.player1 = player1;
         this.player2 = player2;
+
     }
 
     public int getId() {
@@ -35,5 +37,4 @@ public class Game {
     public void setPlayer2(String player2) {
         this.player2 = player2;
     }
-
 }
