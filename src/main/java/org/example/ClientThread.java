@@ -21,7 +21,7 @@ public class ClientThread extends Thread {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/proiectjava";
     private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "java";
+    private static final String DB_PASSWORD = "STUDENT";
 
     private DataBase dataBase = new DataBase();
 
@@ -38,6 +38,7 @@ public class ClientThread extends Thread {
 
             do {
                 request = in.readLine();
+
                 System.out.println("Am primit de la client: " + request);
                 if (request.contains("login")) {
 
@@ -140,7 +141,7 @@ public class ClientThread extends Thread {
                     int id = Integer.parseInt(words[1]); // "id"
 
                     String start_gameResponse = gameListManager.startGame(id);
-
+                    System.out.println("Raspunsul pentru start_game este: " + start_gameResponse);
                     out.println(start_gameResponse);
                     out.flush();
                 }
@@ -195,14 +196,10 @@ public class ClientThread extends Thread {
 
                     int id = Integer.parseInt(words[1]); // "id"
                     String turn = words[2]; // "status"
-                    StringBuilder gameBoardString = new StringBuilder();
 
-                    for(int i = 3; i < 66; i++){
-                        gameBoardString.append(words[i]);
-                        gameBoardString.append(" ");
-                    }
+                    String gameBoard = words[3];
 
-                    String set_game_moveResponse = gameListManager.setGameMove(id, turn, gameBoardString);
+                    String set_game_moveResponse = gameListManager.setGameMove(id, turn, gameBoard);
 
                     out.println(set_game_moveResponse);
                     out.flush();

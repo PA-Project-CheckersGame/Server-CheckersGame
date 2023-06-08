@@ -6,16 +6,14 @@ public class ActiveGame {
         private String player1;
         private String player2;
         private String turn;
-        private String status;
-        private StringBuilder gameBoard;
+        private String status = "onGoing";
+        private String gameBoard = "0_2_0_2_0_2_0_2_2_0_2_0_2_0_2_0_0_2_0_2_0_2_0_2_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_1_0_1_0_1_0_1_0_0_1_0_1_0_1_0_1_1_0_1_0_1_0_1_0";
 
-    public ActiveGame(int gameId, String player1, String player2, String turn, String status, StringBuilder gameBoard) {
+    public ActiveGame(int gameId, String player1, String player2) {
         this.gameId = gameId;
         this.player1 = player1;
         this.player2 = player2;
-        this.turn = turn;
-        this.status = status;
-        this.gameBoard = gameBoard;
+        this.turn = player1;
     }
 
     public int getGameId() {
@@ -58,11 +56,11 @@ public class ActiveGame {
             this.status = status;
         }
 
-        public StringBuilder getGameBoard() {
+        public String getGameBoard() {
             return gameBoard;
         }
 
-        public void setGameBoard(StringBuilder gameBoard) {
+        public void setGameBoard(String gameBoard) {
             this.gameBoard = gameBoard;
         }
 }

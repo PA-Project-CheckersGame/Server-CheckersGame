@@ -112,9 +112,12 @@ public class GameListManager {
     }
 
     public String startGame(int gameId) {
-        ActiveGame activeGame = findActiveGameById(gameId);
-        if (activeGame != null) {
-            activeGame.setStatus("inGame");
+        Game game = findGameById(gameId);
+        if (game != null) {
+            dataBase.changeStatus("InGame", game.getPlayer1());
+            dataBase.changeStatus("InGame", game.getPlayer2());
+            ActiveGame activeGame = new ActiveGame(gameId, game.getPlayer1(), game.getPlayer2());
+            activeGamesList.add(activeGame);
             return "game_started " + gameId + " " + activeGame.getPlayer1() + " " + activeGame.getPlayer2() + " " + activeGame.getTurn();
         } else {
             return "game_not_found";
@@ -130,7 +133,7 @@ public class GameListManager {
         }
     }
 
-    public String setGameMove(int gameId, String turn, StringBuilder gameBoard) {
+    public String setGameMove(int gameId, String turn, String gameBoard) {
         ActiveGame activeGame = findActiveGameById(gameId);
         if (activeGame != null) {
             activeGame.setTurn(turn);
